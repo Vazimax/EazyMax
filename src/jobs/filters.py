@@ -6,3 +6,9 @@ class JobFilter(django_filters.FilterSet):
     class Meta:
         model = Job
         fields = ['title','job_type','category']
+
+class JobFilter2(django_filters.FilterSet):
+    title = django_filters.CharFilter(lookup_expr='icontains')
+    class Meta:
+        model = Job
+        fields = ['title','job_type']

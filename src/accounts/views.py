@@ -29,7 +29,7 @@ def signup(request):
 @login_required
 def profile(request):
     profile = Profile.objects.get(user=request.user)
-
+    
     context = {
         'profile' : profile,
     }
