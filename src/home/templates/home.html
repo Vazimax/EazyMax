@@ -7,11 +7,11 @@
                 <div class="row align-items-center">
                     <div class="col-lg-7 col-md-6">
                         <div class="slider_text">
-                            <h5 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">4536+ Jobs listed</h5>
-                            <h3 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s">Find your Dream Job</h3>
-                            <p class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".4s">We provide online instant cash loans with quick approval that suit your term length</p>
+                            <h5 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">X+ Jobs listed</h5>
+                            <h3 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s"><small>Find Your IDEAL employee</small></h3>
+                            <p class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".4s">We provide the best employees to do what you want</p>
                             <div class="sldier_btn wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
-                                <a href="#" class="boxed-btn3">Upload your Resume</a>
+                                <a href="{% url 'jobs:job_list' %}" class="boxed-btn3">Browse Jobs</a>
                             </div>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
         </div>
     </div>
     <!-- popular_catagory_area_end  -->
-
+    
     <!-- job_listing_area_start  -->
     <div class="job_listing_area">
         <div class="container">
@@ -156,7 +156,7 @@
                                 <div class="jobs_right">
                                     <div class="apply_now">
                                         <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
-                                        <a href="{% url 'jobs:job_detail' job.slug %}" class="boxed-btn3">Apply Now</a>
+                                        <a href="{% url 'jobs:job_detail' job.slug %}" class="boxed-btn3">View</a>
                                     </div>
                                     <div class="date">
                                         <p>{{job.date_posted|date:"F d, Y"}}</p>
@@ -190,7 +190,7 @@
                                         <div class="thumb">
                                             <img src="{{profile.image.url}}" alt="">
                                         </div>
-                                        <a href="#"><h4>{{profile.user.username}}</h4></a>
+                                        <a href="{% url 'accounts:profile' profile.id %}"><h4>{{profile.user.username}}</h4></a>
                                         <p>{{profile.user.username}}</p>
                                     </div>
                                 {% endif %}

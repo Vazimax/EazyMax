@@ -29,7 +29,7 @@
                                         <a href="{% url 'logout' %}">Logout</a>
                                     </div>
                                     <div class="phone_num d-none d-xl-block">
-                                        <a href="{% url 'accounts:profile' %}">profile</a>
+                                        <a href="{% url 'accounts:profile' user.id %}">profile</a>
                                     </div>
                                     <div class="d-none d-lg-block">
                                         <a class="boxed-btn3" href="{% url 'jobs:post_job' %}">Post a Job</a>

@@ -1,10 +1,21 @@
 {% extends "base_generic.html" %}
 {% load bootstrap4 %}
+{% block bradcam %}
+<div class="bradcam_area bradcam_bg_1">
+  <div class="container">
+      <div class="row">
+          <div class="col-xl-12">
+              <div class="bradcam_text">
+                  <h3>Login Page</h3>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+{% endblock %}
 {% block reg %}
 
-  {% if form.errors %}
-    <p>Your username and password didn't match. Please try again.</p>
-  {% endif %}
+
 
   {% if user.is_authenticated %}
     <p>You're already logged in</p>

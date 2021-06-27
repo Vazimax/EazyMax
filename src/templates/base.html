@@ -34,6 +34,13 @@
     <!-- header-start -->
     {% include 'parts/navbar.html' %}
     <!-- header-end -->
+      <div class="row">
+        {% if messages %}
+            {% for message in messages%}
+            <div class="alert alert-{{message.tags}}">{{message}}</div>
+            {% endfor %}
+        {% endif %}
+      </div>
 
     {% block content %}
 

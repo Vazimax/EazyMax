@@ -1,8 +1,10 @@
 from django.contrib.auth.signals import user_logged_in
 from django.db import models
+from django.db.models.fields import related
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from PIL import Image
+from django.urls import reverse
 
 class Category(models.Model):
     name = models.CharField(max_length=100,)
@@ -51,6 +53,17 @@ class Job(models.Model):
     #         output_size = (300,300)
     #         img.thumbnail(output_size)
     #         img.save(self.image.path)
+
+
+class Comment(models.Model):
+    job = models.ForeignKey(Job,on_delete=models.CASCADE,related_name="comments")
+    name = models.CharField(max_length=100)
+    body = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(f"{self.job.title} / {self.name}")
+
 
 
 class Applying(models.Model):

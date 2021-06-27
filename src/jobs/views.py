@@ -1,11 +1,15 @@
+from django.urls.base import reverse_lazy
+from django.views.generic import CreateView , DeleteView , UpdateView
 from django.shortcuts import redirect, render
 from django.core.paginator import Paginator
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django_filters import filters
-from .forms  import JobForm,ApplyForm
+from django.contrib import messages
+from .forms  import JobForm,ApplyForm,CommentForm
 from .filters import JobFilter
 from .models import *
+import random 
 
 
 def job_list(request):
@@ -27,6 +31,9 @@ def job_list(request):
 def job_detail(request,slug):
     job = Job.objects.get(slug=slug)
 
+    jobs = list(Job.objects.all())
+    recent_jobs = random.sample(jobs,5)
+
     if request.method == 'POST' :
         form = ApplyForm(request.POST,request.FILES)
         if form.is_valid():
@@ -38,7 +45,8 @@ def job_detail(request,slug):
 
     context = {
         'job' : job,
-        'form' : form
+        'form' : form,
+        'jobs' : recent_jobs,
     }
     return render(request,'jobs/job_detail.html',context)
 
@@ -51,6 +59,7 @@ def post_job(request):
             my_form = form.save(commit=False)
             my_form.poster = request.user
             my_form.save()
+            messages.success(request,'You created a post successefully')
             return redirect(reverse('jobs:job_list'))
     else :
         form = JobForm()
@@ -59,3 +68,24 @@ def post_job(request):
         'form' : JobForm()
     }
     return render(request,'jobs/post_job.html',context)
+
+# -----IMPORTANT------
+
+@login_required
+def add_comment(request,id):    
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            my_form = form.save(commit=False)
+            my_form.job_id = id
+            my_form.save()
+            messages.success(request,'You created a comment successefully')
+            return redirect(reverse('jobs:job_list'))
+
+    else :
+        form = CommentForm()
+
+    context= {
+        'form' : CommentForm()
+    }
+    return render(request,'jobs/add_comment.html',context)

@@ -1,7 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate , login
 from django.shortcuts import redirect, render 
+from django.core.paginator import Paginator
+from django.contrib import messages
 from django.urls import reverse
+from jobs.models import Job
 from .models import Profile
 from .forms import *
 
@@ -13,9 +16,10 @@ def signup(request):
             form.save()
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
+            messages.success(request,'Your account has been CREATED :)')
             user = authenticate(username=username,password=password)
             login(request,user)
-            return redirect('/accounts/profile')
+            return redirect(f'/accounts/profile/{user.id}')
 
     else :
         form = SignupForm()
@@ -26,12 +30,17 @@ def signup(request):
     return render(request,'registration/signup.html',context)
 
 
-@login_required
-def profile(request):
-    profile = Profile.objects.get(user=request.user)
-    
+def profile(request,id):
+    profile = Profile.objects.get(user=id)
+
+    posts = Job.objects.filter(poster_id=id)
+    paginator = Paginator(posts,3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        'profile' : profile,
+        'profile' : profile, 
+        'posts' : page_obj,
     }
     return render(request,'profile/profile.html',context)
 

@@ -65,8 +65,8 @@
                                         </div>
                                         <div class="jobs_right">
                                             <div class="apply_now">
-                                                <a class="heart_mark" href="#"> <i class="fa fa-heart"></i> </a>
-                                                <a href="{% url 'jobs:job_detail' job.slug %}" class="boxed-btn3">Apply Now</a>
+                                                <a href="{% url 'accounts:profile' job.poster.id %}">{{job.poster}}</i> </a>
+                                                <a href="{% url 'jobs:job_detail' job.slug %}" class="boxed-btn3">View</a>
                                             </div>
                                             <div class="date">
                                                 <p>{{job.date_posted|date:"F d, Y"}}</p>
