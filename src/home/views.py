@@ -105,3 +105,52 @@ def teaching(request):
         'filter' : filter,
     }
     return render(request,'categories/teaching.html',context)
+
+def carpenter(request):
+    jobs = Job.objects.filter(category=6)
+
+    filter = JobFilter2(request.GET,queryset=jobs)
+    jobs = filter.qs
+
+    paginator = Paginator(jobs,9)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'jobs' : page_obj,
+        'filter' : filter,
+    }
+    return render(request,'categories/carpenter.html',context)
+
+def painter(request):
+    jobs = Job.objects.filter(category=7)
+
+    filter = JobFilter2(request.GET,queryset=jobs)
+    jobs = filter.qs
+
+    paginator = Paginator(jobs,9)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'jobs' : page_obj,
+        'filter' : filter,
+    }
+    return render(request,'categories/painter.html',context)
+
+
+def builder(request):
+    jobs = Job.objects.filter(category=8)
+
+    filter = JobFilter2(request.GET,queryset=jobs)
+    jobs = filter.qs
+
+    paginator = Paginator(jobs,9)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'jobs' : page_obj,
+        'filter' : filter,
+    }
+    return render(request,'categories/builder.html',context)

@@ -28,23 +28,28 @@
     <div class="catagory_area">
         <div class="container">
             <div class="row cat_search">
-                <form method="GET" action="{% url 'jobs:job_list' %}">
+                <form method="GET" action="{% url 'jobs:job_list' %}" class="form-inline justify-content-center">
                     {% bootstrap_form filter.form %}
-                    <button  class="boxed-btn3 w-100 mt-3" type="submit">Search</button>
+                    <button  class="boxed-btn3 m-4 mr-3" type="submit">Search</button>
                 </form>
             </div>
+
+
+
+
+            
             <div class="row">
                 <div class="col-lg-12">
                     <div class="popular_search d-flex align-items-center">
                         <span>Popular Search:</span>
                         <ul>
-                            <li><a href="#">Design & Creative</a></li>
-                            <li><a href="#">Marketing</a></li>
-                            <li><a href="#">Administration</a></li>
-                            <li><a href="#">Teaching & Education</a></li>
-                            <li><a href="#">Engineering</a></li>
-                            <li><a href="#">Software & Web</a></li>
-                            <li><a href="#">Telemarketing</a></li>
+                            <li><a href="{% url 'plumber' %}">Plumber</a></li>
+                            <li><a href="{% url 'teaching' %}">Teaching & Education</a></li>
+                            <li><a href="{% url 'porter' %}">Porter</a></li>
+                            <li><a href="{% url 'electrician' %}">Electrician</a></li>
+                            <li><a href="{% url 'carpenter' %}">Carpenter</a></li>
+                            <li><a href="{% url 'painter' %}">Painter</a></li>
+                            <li><a href="{% url 'builder' %}">Builder</a></li>
                         </ul>
                     </div>
                 </div>
@@ -59,11 +64,17 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section_title mb-40">
-                        <h3>Popular Categories</h3>
+                        <h3>The Categories</h3>
                     </div>
                 </div>
             </div>
             <div class="row">
+                <div class="col-lg-4 col-xl-3 col-md-6">
+                    <div class="single_catagory">
+                        <a href="{% url 'jobs:job_list' %}"><h4>All Categories</h4></a>
+                        <p> <span>50</span> Available position</p>
+                    </div>
+                </div>
                 <div class="col-lg-4 col-xl-3 col-md-6">
                     <div class="single_catagory">
                         <a href="{% url 'plumber' %}"><h4>Plumber</h4></a>
@@ -78,7 +89,7 @@
                 </div>
                 <div class="col-lg-4 col-xl-3 col-md-6">
                     <div class="single_catagory">
-                        <a href="{% url 'childcare' %}"><h4>Childcare</h4></a>
+                        <a href="{% url 'painter' %}"><h4>Painter</h4></a>
                         <p> <span>50</span> Available position</p>
                     </div>
                 </div>
@@ -96,19 +107,13 @@
                 </div>
                 <div class="col-lg-4 col-xl-3 col-md-6">
                     <div class="single_catagory">
-                        <a href="jobs.html"><h4>Administration</h4></a>
+                        <a href="{% url 'carpenter' %}"><h4>Carpenter</h4></a>
                         <p> <span>50</span> Available position</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-xl-3 col-md-6">
                     <div class="single_catagory">
-                        <a href="jobs.html"><h4>Engineering</h4></a>
-                        <p> <span>50</span> Available position</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-xl-3 col-md-6">
-                    <div class="single_catagory">
-                        <a href="jobs.html"><h4>Garments / Textile</h4></a>
+                        <a href="{% url 'builder' %}"><h4>Builder</h4></a>
                         <p> <span>50</span> Available position</p>
                     </div>
                 </div>

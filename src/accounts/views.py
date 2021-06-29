@@ -29,7 +29,7 @@ def signup(request):
     }
     return render(request,'registration/signup.html',context)
 
-
+@login_required
 def profile(request,id):
     profile = Profile.objects.get(user=id)
 
@@ -46,8 +46,8 @@ def profile(request,id):
 
 
 @login_required
-def profile_edit(request):
-    profile = Profile.objects.get(user=request.user)
+def profile_edit(request,id):
+    profile = Profile.objects.get(user=id)
     
     if request.method == 'POST':
         u_form = UserForm(request.POST,instance=request.user)
@@ -57,7 +57,8 @@ def profile_edit(request):
             my_profile = p_form.save(commit=False)
             my_profile.user = request.user
             my_profile.save()
-            return redirect(reverse('accounts:profile'))
+            return redirect(f'/accounts/profile/{profile.id}')
+
 
     else :
         u_form = UserForm(instance=request.user)

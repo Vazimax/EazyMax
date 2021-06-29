@@ -5,7 +5,7 @@ app_name="accounts"
 
 urlpatterns = [
     path('signup/',signup,name="signup"),
-    path('profile/<str:id>/',profile,name="profile"),
-    path('profile/edit/',profile_edit,name="profile_edit"),
+    path('profile/<int:id>/',profile,name="profile"),
+    path('profile/<int:id>/edit/',profile_edit,name="profile_edit"),
 
 ]

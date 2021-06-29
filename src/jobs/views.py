@@ -73,6 +73,8 @@ def post_job(request):
 
 @login_required
 def add_comment(request,id):    
+    job = Job.objects.get(id=id)
+    jobx = job.slug
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -80,7 +82,8 @@ def add_comment(request,id):
             my_form.job_id = id
             my_form.save()
             messages.success(request,'You created a comment successefully')
-            return redirect(reverse('jobs:job_list'))
+            return redirect(f'/jobs/{jobx}/')
+
 
     else :
         form = CommentForm()

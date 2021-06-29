@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+    <!-- bradcam_area  -->
+    <div class="bradcam_area bradcam_bg_1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text">
+                        <h3>Profile</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ bradcam_area  -->
+
+    <div class="job_details_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="job_details_header">
+                        <div class="single_jobs white-bg d-flex justify-content-between">
+                            <div class="jobs_left d-flex align-items-center">
+                                <div class="thumb">
+                                    <img style="width: 70px;" src="{{profile.image.url}}" alt="">
+                                </div>
+                                <div class="jobs_conetent">
+                                    <h4>{{profile.user.username}}</h4>
+                                    <div class="links_locat d-flex align-items-center">
+                                        <div class="location">
+                                            <p> <i class="fa fa-map-marker"></i> Tangier , Morocco</p>
+                                        </div>
+                                        <!-- <div class="location">
+                                            <p> <i class="fa fa-clock-o"></i>{{profile.status}}</p>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="jobs_right">
+                                <div class="apply_now">
+                                    <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% if request.user == profile.user %}
+                        <div class="row">
+                            <div class="apply_job_form white-bg">
+                                <h2><a class="boxed-btn3 w-100" href="{% url 'accounts:profile_edit' %}">Edit Profile</a></h2>
+                                <h3><a class="boxed-btn4 w-70" href="{% url 'password_change' %}">Change Password</a></h3>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <br>
+                    <hr>
+                                <div class="job_lists m-0">
+                                    <div class="row">
+                                        <h1>Posts:</h1>
+                                        {% if posts %}
+                                            {% for job in posts %}
+                                                <div class="col-lg-12 col-md-12">
+                                                    <div class="single_jobs white-bg d-flex justify-content-between">
+                                                        <div class="jobs_left d-flex align-items-center">
+                                                            <div class="thumb">
+                                                                <img style="width: 70px;" src="{{job.image.url}}"alt="">
+                                                            </div>
+                                                            <div class="jobs_conetent">
+                                                                <h4>{{job.title}}</h4>
+                                                                <div class="links_locat d-flex align-items-center">
+                                                                    <div class="location">
+                                                                        <p> <i class="fa fa-map-marker"></i> California, USA</p>
+                                                                    </div>
+                                                                    <div class="location">
+                                                                        <p> <i class="fa fa-clock-o"></i>{{job.job_type}}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="jobs_right">
+                                                            <div class="apply_now">
+                                                                <a class="heart_mark" href="#"> <i class="fa fa-heart"></i> </a>
+                                                                <a href="{% url 'jobs:job_detail' job.slug %}" class="boxed-btn3">View</a>
+                                                            </div>
+                                                            <div class="date">
+                                                                <p>{{job.date_posted|date:"F d, Y"}}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        {% else %}  
+                                            <div>
+                                                <br>
+                                                <br>
+                                                <h4>There is no posts</h4>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    {% if posts.has_other_pages %}
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="pagination_wrap">
+                                                    <ul>
+                                                        {% if posts.has_previous %}
+                                                            <li><a href="?page={{posts.previous_page_number}}"> <i class="ti-angle-left"></i> </a></li>
+                                                        {% endif %}
+                                                        {% for page in posts.paginator.page_range %}
+                                                            {% if posts.number == page %}
+                                                                <li><a class="btn btn-secondary mb-4" href="?page={{page}}"><span>{{page}}</span></a></li>
+                                                            {% elif page > posts.number|add:'-3' and page < posts.number|add:'3' %} 
+                                                                <li><a class="btn btn-outline-secondary mb-4" href="?page={{page}}"><span>{{page}}</span></a></li>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                        {% if posts.has_next %}
+                                                            <li><a href="?page={{posts.next_page_number}}"> <i class="ti-angle-right"></i> </a></li>
+                                                        {% endif %}
+                                                        </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="job_sumary">
+                        <div class="summery_header">
+                            <h3>Profile Info</h3>
+                        </div>
+                        <div class="job_content">
+                            <ul>
+                                <li>Username : <span>{{profile.user.username}}</span></li>
+                                <li>First Name : <span>{{profile.user.first_name}}</span></li>
+                                <li>Last Name : <span>{{profile.user.last_name}}</span></li>
+                                <li>Email:<span>{{profile.user.email}}</span></li>
+                                {% if profile.phone_number %}
+                                    <li>Phone Number : <span> +{{profile.phone_number}}</span></li>
+                                {% else %}
+                                    <li>Phone Number : <span>None</span></li>
+                                {% endif %}
+                                <li>Location : <span>Tangier , Billir</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
