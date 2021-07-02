@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>Delete Post</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="job_details_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="apply_job_form white-bg">
+                    <form enctype="multipart/form-data" method="POST">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            <legend class="border-bottom mb-4"><b>Delete Post</b></legend>
+                            <h3>Are You Sure About Deleting The Post "{{object.title}}" ?</h3>
+                        </fieldset>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-outline-danger">Delete</button>
+                            <a href="{% url 'jobs:job_detail' object.slug %}" class="btn btn-outline-info">Cancel</a>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

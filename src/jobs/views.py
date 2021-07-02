@@ -1,5 +1,5 @@
-from django.urls.base import reverse_lazy
-from django.views.generic import CreateView , DeleteView , UpdateView
+from django.views.generic import DeleteView , UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin , UserPassesTestMixin
 from django.shortcuts import redirect, render
 from django.core.paginator import Paginator
 from django.urls import reverse
@@ -92,3 +92,29 @@ def add_comment(request,id):
         'form' : CommentForm()
     }
     return render(request,'jobs/add_comment.html',context)
+
+class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
+    model = Job
+    fields = ['title','description','category','job_type']
+
+    def form_valid(self,form):
+        form.instance.poster = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.poster:
+            return True
+        else :
+            return False
+
+class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
+    model = Job
+    success_url = '/'
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.poster:
+            return True
+        else :
+            return False

@@ -26,7 +26,7 @@ class Job(models.Model):
 
     title = models.CharField(max_length=250)
     poster = models.ForeignKey(User,related_name='job_poster',on_delete=models.CASCADE)
-    description = models.TextField(default="What ill do : \nExperience : \nPrice : ",max_length=2000,blank=True,null=True)
+    description = models.TextField(max_length=2000,blank=True,null=True)
     job_type = models.CharField(max_length=100,choices=JOB_TYPE,null=True,blank=True)
     date_posted = models.DateTimeField(auto_now_add=True)
     featured = models.BooleanField(default=False)
@@ -44,6 +44,9 @@ class Job(models.Model):
         self.slug = slugify(self.title)
         super(Job,self).save(*args,**kwargs)
 
+    def get_absolute_url(self):
+        return reverse('jobs:job_detail',kwargs={'slug':self.slug})
+
     # def savex(self):
     #     self.save()
 
@@ -56,9 +59,9 @@ class Job(models.Model):
 
 
 class Comment(models.Model):
-    job = models.ForeignKey(Job,on_delete=models.CASCADE,related_name="comments")
+    job = models.ForeignKey(Job,on_delete=models.CASCADE,related_name="comments",null=True)
     name = models.CharField(max_length=100)
-    body = models.TextField()
+    description = models.TextField(max_length=2000,blank=True,null=True)
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

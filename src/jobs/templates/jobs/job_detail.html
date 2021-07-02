@@ -18,6 +18,34 @@
     <div class="job_details_area">
         <div class="container">
             <div class="row">
+                <div class="col-lg-4">
+                    <div class="job_sumary">
+                        <div class="summery_header">
+                            <h3>Job Summery</h3>
+                        </div>
+                        <div class="job_content">
+                            <ul>
+                                <div>
+                                    {% if job.poster == user %}
+                                      <a href="{% url 'jobs:post-update' job.id %}" class="btn btn-secondary btn-sm mb-1 mt-1">Update</a>
+                                      <a href="{% url 'jobs:post-delete' job.id %}" class="btn btn-danger btn-sm mb-1 mt-1">Delete</a>
+                                    {% endif %}
+                                  </div>
+                                <li>Poster: <b><a href="{% url 'accounts:profile' job.poster.id %}" class="">{{job.poster}}</a></b></li>
+                                <li>Published on: <span>{{job.date_posted|date:"F d, Y"}}</span></li>
+                                <li>Location: <span>Tangier, Morocco</span></li>
+                                <li>Job Nature: <span>{{job.job_type}}</span></li>
+                                <li>Phone Number : <b>
+                                    {% if job.poster.profile.phone_number %}
+                                        +{{job.poster.profile.phone_number}}
+                                    {% else %}
+                                        None
+                                    {% endif %}
+                                </b></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-lg-8">
                     <div class="job_details_header">
                         <div class="single_jobs white-bg d-flex justify-content-between">
@@ -29,7 +57,7 @@
                                     <a href="#"><h4>{{job.title}}</h4></a>
                                     <div class="links_locat d-flex align-items-center">
                                         <div class="location">
-                                            <p> <i class="fa fa-map-marker"></i> California, USA</p>
+                                            <p> <i class="fa fa-map-marker"></i> Tangier , Morocco</p>
                                         </div>
                                         <div class="location">
                                             <p> <i class="fa fa-clock-o"></i>{{job.job_type}}</p>
@@ -37,46 +65,54 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="jobs_right">
-                                <div class="apply_now">
-                                    <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div class="descript_wrap white-bg">
                         <div class="single_wrap">
-                            <h4>Job description</h4>
                             <p>{{job.description}}</p>
                         </div>
-                        <div class="single_wrap">
-                            <h4>Responsibility</h4>
-                            <ul>
-                                <li>The applicants should have experience in the following areas.
-                                </li>
-                                <li>Have sound knowledge of commercial activities.</li>
-                                <li>Leadership, analytical, and problem-solving abilities.</li>
-                                <li>Should have vast knowledge in IAS/ IFRS, Company Act, Income Tax, VAT.</li>
-                            </ul>
-                        </div>
-                        <div class="single_wrap">
-                            <h4>Qualifications</h4>
-                            <ul>
-                                <li>The applicants should have experience in the following areas.
-                                </li>
-                                <li>Have sound knowledge of commercial activities.</li>
-                                <li>Leadership, analytical, and problem-solving abilities.</li>
-                                <li>Should have vast knowledge in IAS/ IFRS, Company Act, Income Tax, VAT.</li>
-                            </ul>
-                        </div>
-                        <div class="single_wrap">
-                            <h4>Benefits</h4>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing.</p>
+                    </div>
+                    <hr>
+                    <h2>Comments</h2>
+                    <div class="job_details_header">
+                        <div class="single_jobs white-bg d-flex justify-content-between">
+                            <div class="jobs_left d-flex align-items-center">
+                                <div class="jobs_content">
+                                    {% if not job.comments.all %}
+                                            <h4>No comment yet</h4>
+                                            <a class="boxed-btn4" href="{% url 'jobs:add_comment' job.id %}">Add One</a>
+                                    {% else %}
+                                        <a class="boxed-btn4" href="{% url 'jobs:add_comment' job.id %}">Add A Comment</a>
+                                        <br>
+                                        <br>
+                                        {% for comment in job.comments.all %}
+                                            <h4>{{comment.name}}</h4>
+                                                <div class="links_locat d-flex align-items-center">
+                                                    <div class="location">
+                                                        <p> <i class="fa fa-clock-o"> {{comment.date_added|date:"F d, Y"}}</i></p>
+                                                    </div>
+                                                </div>   
+                                            <div class="descript_wrap white-bg">
+                                                    <div class="single_wrap">
+                                                        <p>{{comment.description}}</p>
+                                                    </div>
+                                            </div>   
+                                        {% endfor %}
+                                            </div>
+                                    {% endif %}
+                                    </div>
+                                </div>
                         </div>
                     </div>
                     <br>
-                    <hr>
-                    <br>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
                     <div class="container">
                         <div class="row align-items-center">
                             <div class="col-lg-6">
@@ -115,7 +151,7 @@
                                             </div>
                                             <div class="jobs_right">
                                                 <div class="apply_now">
-                                                    <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
+                                                    <a href="{% url 'accounts:profile' job.poster.id %}">{{job.poster}}</i> </a>
                                                     <a href="{% url 'jobs:job_detail' job.slug %}" class="boxed-btn3">View</a>
                                                 </div>
                                                 <div class="date">
@@ -126,53 +162,6 @@
                                     </div>
                                 {% endfor %}
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="job_sumary">
-                        <div class="summery_header">
-                            <h3>Job Summery</h3>
-                        </div>
-                        <div class="job_content">
-                            <ul>
-                                <li>Poster: <b><a href="{% url 'accounts:profile' job.poster.id %}" class="">{{job.poster}}</a></b></li>
-                                <li>Published on: <span>{{job.date_posted|date:"F d, Y"}}</span></li>
-                                <li>Location: <span>Tangier, Morocco</span></li>
-                                <li>Job Nature: <span>{{job.job_type}}</span></li>
-                                <li>Phone Number : <b>
-                                    {% if job.poster.profile.phone_number %}
-                                        +{{job.poster.profile.phone_number}}
-                                    {% else %}
-                                        None
-                                    {% endif %}
-                                </b></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="job_sumary">
-                        <div class="summery_header">
-                            <h3>Comments</h3>
-                        </div>
-                        <div class="job_content">
-                            {% if not job.comments.all %}
-                                <h4>No comment yet</h4>
-                                <a class="boxed-btn4" href="{% url 'jobs:add_comment' job.id %}">Add One</a>
-                            {% else %} 
-                                <a class="boxed-btn4" href="{% url 'jobs:add_comment' job.id %}">Add A Comment</a>
-                                <br>
-                                <br>
-                                {% for comment in job.comments.all %}
-                                    <strong>
-                                        {{comment.name}} / 
-                                        {{comment.date_added|date:"F d, Y"}}
-                                    </strong>
-                                    <br>
-                                    {{comment.body}}
-                                    <hr>
-                                {% endfor %}
-                            {% endif %}
                         </div>
                     </div>
                 </div>

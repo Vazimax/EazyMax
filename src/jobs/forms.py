@@ -19,8 +19,8 @@ class JobForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ['name','body']
+        fields = ['name','description']
         widgets = {
-            'name' : forms.TextInput(attrs={'class' : 'form-control','placeholder': 'Write the name of the comment'}),
-            'body' : forms.Textarea(attrs={'class' : 'form-control','placeholder' : 'Write the details here'}),
+            'name' : forms.TextInput(attrs={'class' : 'form-control','placeholder': 'Write the title of the comment'}),
+            'description' : forms.Textarea(attrs={'class' : 'form-control','placeholder' : 'Write the details here'}),
         }

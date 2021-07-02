@@ -160,7 +160,7 @@
                                 </div>
                                 <div class="jobs_right">
                                     <div class="apply_now">
-                                        <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
+                                        <a href="{% url 'accounts:profile' job.poster.id %}">{{job.poster}}</i> </a>
                                         <a href="{% url 'jobs:job_detail' job.slug %}" class="boxed-btn3">View</a>
                                     </div>
                                     <div class="date">
