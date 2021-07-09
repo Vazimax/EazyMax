@@ -3,7 +3,6 @@ from django.contrib.auth import authenticate , login
 from django.shortcuts import redirect, render 
 from django.core.paginator import Paginator
 from django.contrib import messages
-from django.urls import reverse
 from jobs.models import Job
 from .models import Profile
 from .forms import *
@@ -16,7 +15,7 @@ def signup(request):
             form.save()
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
-            messages.success(request,'Your account has been CREATED :)')
+            messages.success(request,'Safi drti compte daba ;)')
             user = authenticate(username=username,password=password)
             login(request,user)
             return redirect(f'/accounts/profile/{user.id}')

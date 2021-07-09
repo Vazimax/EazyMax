@@ -28,8 +28,8 @@ def job_list(request):
     }
     return render(request,'jobs/job_list.html',context)
 
-def job_detail(request,slug):
-    job = Job.objects.get(slug=slug)
+def job_detail(request,id):
+    job = Job.objects.get(id=id)
 
     jobs = list(Job.objects.all())
     recent_jobs = random.sample(jobs,5)
@@ -73,8 +73,6 @@ def post_job(request):
 
 @login_required
 def add_comment(request,id):    
-    job = Job.objects.get(id=id)
-    jobx = job.slug
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -82,7 +80,7 @@ def add_comment(request,id):
             my_form.job_id = id
             my_form.save()
             messages.success(request,'You created a comment successefully')
-            return redirect(f'/jobs/{jobx}/')
+            return redirect(f'/jobs/{id}/')
 
 
     else :

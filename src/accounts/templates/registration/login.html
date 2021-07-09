@@ -18,23 +18,23 @@
 
 
   {% if user.is_authenticated %}
-    <p>You're already logged in</p>
+    <p>Nta msjl mn 9bl</p>
   {% else %}
   <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
     {% bootstrap_form form %}
-    <input type="submit" value="login" class="boxed-btn3 w-100" />
+    <input type="submit" value="tsjl" class="boxed-btn3 w-100" />
     <input type="hidden" name="next" value="{{ next }}" />
   </form>
   <br>
   <small class="text-muted ml-2">
-    <a href="{% url 'password_reset' %}">Forgot Password ?</a>
+    <a href="{% url 'password_reset' %}">nsiti l code ?</a>
  </small>
  <br>
   <br>
 <div class="border-top pt-3">
     <p class="text-muted">
-        Don't Have An Account : <a href="{% url 'accounts:signup' %}" class="ml-2 btn btn-info">Sign Up</a>
+        ma3andch compte ? <a href="{% url 'accounts:signup' %}" class="ml-2 btn btn-info">3ml compte </a>
     </p>
 </div>
 {% endif %}

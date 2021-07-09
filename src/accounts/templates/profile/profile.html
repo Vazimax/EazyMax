@@ -14,6 +14,8 @@
         </div>
     </div>
     <!--/ bradcam_area  -->
+    
+    {% include 'parts/comment.html' %}
 
     <div class="job_details_area">
         <div class="container">
@@ -22,9 +24,8 @@
                     <div class="job_details_header">
                         <div class="single_jobs white-bg d-flex justify-content-between">
                             <div class="jobs_left d-flex align-items-center">
-                                <div class="thumb">
-                                    <img style="width: 70px;" src="{{profile.image.url}}" alt="">
-                                </div>
+                                    <img class="rounded-circle" style="height :125px ; width:125px ; margin-right : 20px ;margin-bottom: 16px;" 
+                                    src="{{profile.image.url}}" alt="">
                                 <div class="jobs_conetent">
                                     <h4>{{profile.user.username}}</h4>
                                     <div class="links_locat d-flex align-items-center">
@@ -41,8 +42,8 @@
                         {% if request.user == profile.user %}
                         <div class="row">
                             <div class="apply_job_form white-bg">
-                                <h2><a class="boxed-btn3 w-100" href="{% url 'accounts:profile_edit' profile.id %}">Edit Profile</a></h2>
-                                <h3><a class="boxed-btn4 w-70" href="{% url 'password_change' %}">Change Password</a></h3>
+                                <h2><a class="boxed-btn3 w-100" href="{% url 'accounts:profile_edit' profile.id %}">Zid W n9s f profile</a></h2>
+                                <h3><a class="boxed-btn4 w-70" href="{% url 'password_change' %}">Bdel Lcode</a></h3>
                             </div>
                         </div>
                         {% endif %}
@@ -64,7 +65,7 @@
                                                                 <h4>{{job.title}}</h4>
                                                                 <div class="links_locat d-flex align-items-center">
                                                                     <div class="location">
-                                                                        <p> <i class="fa fa-map-marker"></i> California, USA</p>
+                                                                        <p> <i class="fa fa-map-marker"></i>Tangier , Morocco</p>
                                                                     </div>
                                                                     <div class="location">
                                                                         <p> <i class="fa fa-clock-o"></i>{{job.job_type}}</p>
@@ -75,7 +76,7 @@
                                                         <div class="jobs_right">
                                                             <div class="apply_now">
                                                                 <a class="heart_mark" href="#"> <i class="fa fa-heart"></i> </a>
-                                                                <a href="{% url 'jobs:job_detail' job.slug %}" class="boxed-btn3">View</a>
+                                                                <a href="{% url 'jobs:job_detail' job.id %}" class="boxed-btn3">Chuf</a>
                                                             </div>
                                                             <div class="date">
                                                                 <p>{{job.date_posted|date:"F d, Y"}}</p>
@@ -88,7 +89,9 @@
                                             <div>
                                                 <br>
                                                 <br>
-                                                <h4>There is no posts</h4>
+                                                <h4>Makayn hta post</h4>
+                                                <h5>Bari dir post ?  </h5>
+                                            <a class="boxed-btn3" href="{% url 'jobs:post_job' %}">Nzel post</a>
                                             </div>
                                         {% endif %}
                                     </div>
@@ -125,15 +128,14 @@
                         <div class="job_content">
                             <ul>
                                 <li>Username : <span>{{profile.user.username}}</span></li>
-                                <li>First Name : <span>{{profile.user.first_name}}</span></li>
-                                <li>Last Name : <span>{{profile.user.last_name}}</span></li>
+                                <li>Smiya : <span>{{profile.user.first_name}}</span></li>
+                                <li>Kniya wla l2assal : <span>{{profile.user.last_name}}</span></li>
                                 <li>Email:<span>{{profile.user.email}}</span></li>
                                 {% if profile.phone_number %}
-                                    <li>Phone Number : <span> +{{profile.phone_number}}</span></li>
+                                    <li>Nmra d telephone : <span> +{{profile.phone_number}}</span></li>
                                 {% else %}
-                                    <li>Phone Number : <span>None</span></li>
+                                    <li>Nmra d telephone : <span>None</span></li>
                                 {% endif %}
-                                <li>Location : <span>Tangier , Billir</span></li>
                             </ul>
                         </div>
                     </div>

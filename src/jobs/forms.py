@@ -14,7 +14,7 @@ class JobForm(forms.ModelForm):
     class Meta:
         model = Job
         fields = '__all__'
-        exclude = ['featured','slug','poster']
+        exclude = ['featured','poster']
 
 class CommentForm(forms.ModelForm):
     class Meta:
