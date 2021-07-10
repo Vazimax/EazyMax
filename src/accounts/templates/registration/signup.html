@@ -6,7 +6,7 @@
       <div class="row">
           <div class="col-xl-12">
               <div class="bradcam_text">
-                  <h3>Dir compte</h3>
+                  <h3>Create An Account</h3>
               </div>
           </div>
       </div>
@@ -18,11 +18,11 @@
   <form method="POST">
     {% csrf_token %}
     {% bootstrap_form form %}
-    <input type="submit" value="Dir Compte" class="boxed-btn3 w-100" />
+    <input type="submit" value="Register" class="boxed-btn3 w-100" />
   </form>
 <div class="border-top pt-3">
     <p class="text-muted">
-        Nta 3andk compte : <a href="{% url 'login' %}" class="ml-2 btn btn-info"> Tsejel</a>
+        Already have an account : <a href="{% url 'login' %}" class="ml-2 btn btn-info">Login</a>
     </p>
 </div>
 
